@@ -1,0 +1,45 @@
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# env files
+**/.env
+
+# IDE / Editor files
+**/.idea/
+**/.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Node.js
+**/node_modules/
+**/.next/
+**/.turbo/
+**/dist/
+**/.cache/
+*.tsbuildinfo
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+*.pyo
+*.pyd
+*.so
+**/.venv/
+**/.env
+**/.env.*
+*.egg-info/
+**/.eggs/
+**/.mypy_cache/
+**/.pytest_cache/
+**/.coverage
+**/htmlcov/
+
+# Temporary / Generated
+**/tmp/
+**/temp/
+
+# Configuration files
+.claude/settings.local.json
+.claude/plans/
