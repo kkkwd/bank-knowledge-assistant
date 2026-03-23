@@ -5,6 +5,9 @@ Thumbs.db
 # env files
 **/.env
 
+# instruction files
+instructions.md
+
 # IDE / Editor files
 **/.idea/
 **/.vscode/
