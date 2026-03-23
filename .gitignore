@@ -8,6 +8,9 @@ Thumbs.db
 # instruction files
 instructions.md
 
+# docs files
+docs/
+
 # IDE / Editor files
 **/.idea/
 **/.vscode/
