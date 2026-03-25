@@ -11,6 +11,10 @@ instructions.md
 # docs files
 docs/
 
+# bank knowledge test files
+library/
+data/
+
 # IDE / Editor files
 **/.idea/
 **/.vscode/
