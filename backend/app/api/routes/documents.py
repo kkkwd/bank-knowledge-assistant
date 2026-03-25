@@ -37,5 +37,5 @@ def reindex_document(document_id: int, db: Session = Depends(get_db)) -> Documen
     document = repository.get(document_id)
     if document is None:
         raise HTTPException(status_code=404, detail="Document not found")
-    repository.mark_for_reindex(document)
-    return DocumentReindexResponse(document_id=document_id, status="queued")
+    indexed = IngestService(db).index_document(document)
+    return DocumentReindexResponse(document_id=document_id, status=indexed.index_status)

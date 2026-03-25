@@ -14,12 +14,19 @@ class Settings(BaseSettings):
     default_knowledge_bases: list[str] = Field(
         default=["Policy Library", "Product Library", "FAQ Library"]
     )
+    llm_provider: str = "minimax"
+    llm_model: str = "MiniMax-M2.7"
+    llm_max_tokens: int = 800
+    llm_temperature: float = 0.2
+    anthropic_base_url: str | None = Field(default=None, alias="ANTHROPIC_BASE_URL")
+    anthropic_api_key: str | None = Field(default=None, alias="ANTHROPIC_API_KEY")
 
     model_config = SettingsConfigDict(
         env_prefix="BACKEND_",
-        env_file=".env",
+        env_file=(".env", "../.env"),
         env_file_encoding="utf-8",
         case_sensitive=False,
+        extra="ignore",
     )
 
 

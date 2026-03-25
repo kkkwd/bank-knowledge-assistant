@@ -20,6 +20,12 @@ class DocumentRepository:
         self.db.refresh(document)
         return document
 
+    def save(self, document: Document) -> Document:
+        self.db.add(document)
+        self.db.commit()
+        self.db.refresh(document)
+        return document
+
     def delete(self, document_id: int) -> bool:
         document = self.get(document_id)
         if document is None:

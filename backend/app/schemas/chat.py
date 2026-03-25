@@ -14,6 +14,7 @@ class RetrievedChunk(BaseModel):
     score: float
     document_name: str
     content: str
+    page_number: int | None = None
 
 
 class ChatAskRequest(BaseModel):

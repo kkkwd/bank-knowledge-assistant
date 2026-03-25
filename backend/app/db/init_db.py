@@ -3,6 +3,7 @@ from sqlalchemy import select
 from app.core.config import settings
 from app.db.base import Base
 from app.db.session import SessionLocal, engine
+from app.models.chunk import Chunk
 from app.models.document import Document
 from app.models.knowledge_base import KnowledgeBase
 from app.models.message import Message
@@ -21,4 +22,4 @@ def init_db() -> None:
         db.commit()
 
 
-__all__ = ["Document", "KnowledgeBase", "Message", "ChatSession"]
+__all__ = ["Chunk", "Document", "KnowledgeBase", "Message", "ChatSession"]
