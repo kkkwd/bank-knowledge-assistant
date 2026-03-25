@@ -18,6 +18,7 @@ export type RetrievedChunk = {
   score: number;
   document_name: string;
   content: string;
+  page_number?: number | null;
 };
 
 export type ChatAskResponse = {

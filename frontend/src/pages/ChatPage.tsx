@@ -26,7 +26,7 @@ export function ChatPage() {
   }, []);
 
   async function ensureSession(knowledgeBaseId: number) {
-    if (session) {
+    if (session && session.knowledge_base_id === knowledgeBaseId) {
       return session.id;
     }
     const created = await createSession({
@@ -137,7 +137,10 @@ export function ChatPage() {
                 citations.map((item) => (
                   <div key={`${item.document_name}-${item.chunk_index}`} className="rounded-2xl bg-slate-50 p-4">
                     <p className="text-sm font-medium text-ink">{item.document_name}</p>
-                    <p className="mt-1 text-xs text-slate-500">Chunk #{item.chunk_index}</p>
+                    <p className="mt-1 text-xs text-slate-500">
+                      Chunk #{item.chunk_index}
+                      {item.page_number ? ` · 第 ${item.page_number} 页` : ""}
+                    </p>
                     <p className="mt-2 text-sm leading-6 text-slate-600">{item.snippet_text}</p>
                   </div>
                 ))
@@ -154,7 +157,10 @@ export function ChatPage() {
                 retrievedChunks.map((item) => (
                   <div key={`${item.document_name}-${item.chunk_index}`} className="rounded-2xl border border-slate-200 p-4">
                     <p className="text-sm font-medium text-ink">{item.document_name}</p>
-                    <p className="mt-1 text-xs text-slate-500">Score {item.score.toFixed(2)}</p>
+                    <p className="mt-1 text-xs text-slate-500">
+                      Score {item.score.toFixed(2)}
+                      {item.page_number ? ` · 第 ${item.page_number} 页` : ""}
+                    </p>
                     <p className="mt-2 text-sm leading-6 text-slate-600">{item.content}</p>
                   </div>
                 ))
