@@ -4,8 +4,8 @@ services:
       context: ./backend
     working_dir: /app
     environment:
-      - anthropic_api_key=${ANTHROPIC_API_KEY}
-      - anthropic_base_url=${ANTHROPIC_BASE_URL}
+      - BACKEND_ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - BACKEND_ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL}
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
       - ./backend:/app
