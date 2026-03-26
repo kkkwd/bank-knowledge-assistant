@@ -97,7 +97,7 @@ export function KnowledgeBasePage() {
           </label>
 
           <label className="flex cursor-pointer items-end">
-            <span className="rounded-full bg-bank-700 px-5 py-3 text-sm font-semibold text-white">
+            <span className="w-full rounded-full bg-bank-700 px-5 py-3 text-center text-sm font-semibold text-white md:w-auto">
               {uploading ? "上传并索引中..." : "上传文档"}
             </span>
             <input
@@ -113,7 +113,7 @@ export function KnowledgeBasePage() {
         {loading ? <p className="text-sm text-slate-500">Loading knowledge bases...</p> : null}
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
         {knowledgeBases.length > 0 ? (
-          <div className="mb-5 overflow-hidden rounded-2xl border border-slate-200">
+          <div className="mb-5 overflow-x-auto rounded-2xl border border-slate-200">
             <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
               <thead className="bg-slate-50 text-slate-500">
                 <tr>
@@ -136,7 +136,7 @@ export function KnowledgeBasePage() {
         ) : null}
 
         {selectedKnowledgeBaseId !== null ? (
-          <div className="overflow-hidden rounded-2xl border border-slate-200">
+          <div className="overflow-x-auto rounded-2xl border border-slate-200">
             <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
               <thead className="bg-slate-50 text-slate-500">
                 <tr>

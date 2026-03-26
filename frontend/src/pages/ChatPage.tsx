@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 
 import { askQuestion, createSession, fetchSession } from "../api/chat";
+import { MarkdownContent } from "../components/MarkdownContent";
 import { fetchKnowledgeBases } from "../api/knowledgeBase";
 import { SectionCard } from "../components/SectionCard";
 import { Citation, RetrievedChunk, SessionDetail } from "../types/chat";
@@ -65,17 +66,32 @@ export function ChatPage() {
 
   return (
     <div className="grid gap-6 xl:grid-cols-[0.9fr_1.4fr_1fr]">
-      <SectionCard title="会话" description="左侧展示会话与消息快照。">
+      <SectionCard title="会话" description="左侧保留本轮会话的上下文，便于连续追问。">
         {session ? (
           <div className="space-y-3">
-            <div className="rounded-2xl bg-slate-50 p-4">
+            <div className="rounded-3xl border border-bank-100 bg-gradient-to-br from-bank-50 to-white p-5">
               <p className="font-semibold text-ink">{session.title}</p>
               <p className="mt-1 text-xs text-slate-500">Session #{session.id}</p>
             </div>
             {session.messages.map((message) => (
-              <div key={message.id} className="rounded-2xl border border-slate-200 p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">{message.role}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-700">{message.content}</p>
+              <div
+                key={message.id}
+                className={[
+                  "rounded-3xl border p-4 shadow-sm",
+                  message.role === "assistant"
+                    ? "border-bank-100 bg-bank-50/55"
+                    : "border-slate-200 bg-white",
+                ].join(" ")}
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400">{message.role}</p>
+                  {message.model_name ? (
+                    <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-medium text-slate-500">
+                      {message.model_name}
+                    </span>
+                  ) : null}
+                </div>
+                <MarkdownContent className="mt-3 text-sm text-slate-700" content={message.content} />
               </div>
             ))}
           </div>
@@ -84,7 +100,7 @@ export function ChatPage() {
         )}
       </SectionCard>
 
-      <SectionCard title="智能问答" description="当前已打通提问、会话创建与占位答案返回。">
+      <SectionCard title="智能问答" description="支持 Markdown 回答渲染，便于展示结构化答案。">
         <form className="space-y-4" onSubmit={handleSubmit}>
           <label className="block">
             <span className="mb-2 block text-sm font-medium text-slate-600">知识库</span>
@@ -110,7 +126,7 @@ export function ChatPage() {
             />
           </label>
           <button
-            className="rounded-full bg-bank-700 px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:bg-slate-300"
+            className="rounded-full bg-bank-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-bank-900 disabled:cursor-not-allowed disabled:bg-slate-300"
             type="submit"
             disabled={submitting}
           >
@@ -119,9 +135,11 @@ export function ChatPage() {
         </form>
 
         {answer ? (
-          <div className="mt-6 rounded-3xl bg-slate-50 p-5">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Answer</p>
-            <p className="mt-3 text-sm leading-7 text-slate-700">{answer}</p>
+          <div className="mt-6 overflow-hidden rounded-[28px] border border-bank-100 bg-white shadow-panel">
+            <div className="border-b border-bank-100 bg-gradient-to-r from-bank-50 via-white to-bank-50 px-5 py-4">
+              <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Answer</p>
+            </div>
+            <MarkdownContent className="px-5 py-5 text-sm text-slate-700" content={answer} />
           </div>
         ) : null}
       </SectionCard>

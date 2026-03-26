@@ -1,41 +1,63 @@
 import { NavLink, Outlet } from "react-router-dom";
 
+import { useAdminAuth } from "../../auth/AdminAuthContext";
+
 const navItems = [
   { to: "/", label: "项目概览" },
-  { to: "/knowledge-bases", label: "知识库管理" },
   { to: "/chat", label: "智能问答" },
   { to: "/monitoring", label: "系统监控" },
 ];
 
 export function AppLayout() {
+  const { isAuthenticated, logout } = useAdminAuth();
+
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(212,166,60,0.18),_transparent_28%),linear-gradient(180deg,_#f9fbfd_0%,_#edf3f8_100%)] text-ink">
       <header className="border-b border-slate-200/70 bg-white/80 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-bank-700">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-bank-700 sm:text-sm sm:tracking-[0.28em]">
               Banking RAG Demo
             </p>
-            <h1 className="text-xl font-bold text-ink">银行知识库智能问答助手</h1>
+            <h1 className="text-lg font-bold text-ink sm:text-xl">银行知识库智能问答助手</h1>
           </div>
-          <nav className="flex gap-2 rounded-full bg-slate-100 p-1">
-            {navItems.map((item) => (
+          <div className="flex w-full flex-col gap-3 lg:w-auto lg:flex-row lg:items-center lg:gap-4">
+            <nav className="-mx-1 flex overflow-x-auto rounded-full bg-slate-100 p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `shrink-0 rounded-full px-4 py-2 text-sm font-medium transition ${
+                      isActive ? "bg-bank-700 text-white" : "text-slate-600 hover:text-bank-700"
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+            <div className="flex flex-wrap items-center gap-2 text-sm">
               <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  `rounded-full px-4 py-2 text-sm font-medium transition ${
-                    isActive ? "bg-bank-700 text-white" : "text-slate-600 hover:text-bank-700"
-                  }`
-                }
+                to={isAuthenticated ? "/admin/knowledge-bases" : "/admin/login"}
+                className="rounded-full px-3 py-2 text-slate-500 transition hover:bg-slate-100 hover:text-bank-700"
               >
-                {item.label}
+                管理入口
               </NavLink>
-            ))}
-          </nav>
+              {isAuthenticated ? (
+                <button
+                  className="rounded-full px-3 py-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
+                  type="button"
+                  onClick={logout}
+                >
+                  退出
+                </button>
+              ) : null}
+            </div>
+          </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-6 py-8">
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
         <Outlet />
       </main>
     </div>
