@@ -123,15 +123,29 @@ export function LandingPage() {
           <div className="relative">
             <div className="pointer-events-none absolute -left-16 top-0 h-40 w-40 rounded-full bg-gold/20 blur-3xl" />
             <p className="relative text-xs uppercase tracking-[0.24em] text-gold sm:text-sm sm:tracking-[0.34em]">
-              Project Overview
+              Banking RAG Demo
             </p>
+            <div className="relative mt-4 flex flex-wrap gap-2">
+              <span className="rounded-full border border-gold/40 bg-gold/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold sm:text-xs">
+                个人简历展示项目
+              </span>
+              <span className="rounded-full border border-white/16 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-50/90 sm:text-xs">
+                Non-Commercial Use Only
+              </span>
+            </div>
             <h2 className="relative mt-4 max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-              面向银行业务场景的知识库问答工作台
+              银行知识库智能问答助手
             </h2>
             <p className="relative mt-5 max-w-2xl text-sm leading-7 text-emerald-50/90 lg:text-base">
-              当前版本已完成前后端脚手架初始化、基础页面联调与交互骨架搭建。后续可在此基础上接入文档解析、
-              向量检索、模型调用与可追溯引用能力，逐步形成完整的银行知识问答闭环。
+              该站点用于展示银行知识库问答、检索增强与前后端联调能力，定位为个人简历项目作品集页面。
+              当前版本已完成基础页面联调与交互骨架搭建，后续可继续扩展文档解析、向量检索、模型调用与可追溯引用能力。
             </p>
+            <div className="relative mt-5 rounded-[1.5rem] border border-white/12 bg-black/10 px-4 py-4 backdrop-blur-sm">
+              <p className="text-sm font-semibold text-white">使用说明</p>
+              <p className="mt-2 text-sm leading-7 text-emerald-50/85">
+                本项目仅供个人学习、作品展示与简历投递场景使用，无商业用途；页面内容与文案禁止摘抄、搬运或对外宣传。
+              </p>
+            </div>
             <div className="relative mt-8 flex flex-wrap gap-3">
               <Link
                 className="rounded-full bg-gold px-5 py-3 text-sm font-semibold text-bank-900 transition hover:scale-[1.03] hover:shadow-lg"
